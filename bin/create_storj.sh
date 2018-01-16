@@ -1,13 +1,25 @@
 #!/bin/bash
 
-if [ $# -ne 4 ]; then
-	echo "Usage : $0 <Address> <Port> <Directory> <Size>"
+CONFIG_FILE=${0%.*}.conf
+if [ -f $CONFIG_FILE ]; then
+	echo "CONFIG : $CONFIG_FILE"
+else
+	echo "Could not find $CONFIG_FILE."
 	exit 1
 fi
 
-storjshare create \
-  --storj 0x70262975F5f40f82D1098177eAf80db03D38b7B1 \
-  --storage /home/storj/node3 --size 2GB \
-  --rpcport "4030" --rpcaddress "sunyzero9.iptime.org" \
-  --tunnelportmin 0 --tunnelportmax 0 
+source $CONFIG_FILE
 
+iteration=1
+while : ;
+do
+if [ $iteration -gt ${NODE_CNT} ]; then
+	break;
+fi
+storjshare create --storj ${ETH_CONTRACT} \
+			   --storage ${PARENT_DIR}/node${iteration} --size ${SIZE_PER_NODE} \
+			   --rpcport ${PORT} --rpcaddress ${ADDRESS} \
+			   --noedit
+let iteration++
+let PORT++
+done
