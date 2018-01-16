@@ -42,5 +42,5 @@ mount $DIR_MEDIA
 mkdir -p ${DIR_MEDIA}/node{1..8}
 chown -R storj.storj ${DIR_MEDIA}
 
-cp p3_setup_storj.sh bin ~storj/
+cp -a p3_setup_storj.sh bin ~storj/
 chown -R storj.storj ~storj/bin p3_setup_storj.sh

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ $USERNAME != "storj" ]; then
-	echo "You should be storj user to run this shell script. But you are ${USERNAME}."
+if [ $USER != "storj" ]; then
+	echo "You should be storj user to run this shell script. But you are ${USER}."
 	exit 1
 fi
 
